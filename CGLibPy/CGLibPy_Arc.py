@@ -10,11 +10,11 @@ class CGLibPy_Arc(object):
     CCW = True
 
     def __init__(self,_args):
-        if _args.length() == 3:
+        if len(_args) == 3:
             self.centrePt = _args[0]
             self.radius = _args[1]
             self.CCW = _args[2]
-        elif _args.length() == 5:
+        elif len(_args) == 5:
             self.centrePt = _args[0]
             self.startPt = _args[1]
             self.endPt = _args[2]
