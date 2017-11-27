@@ -1,6 +1,6 @@
 from .CGLibPy_Point import CGLibPy_Point
 from .CGLibPy_Vector import CGLibPy_Vector
-import math
+from .CGLibPy_Utility import *
 
 class CGLibPy_Line(object):
     startPt = None
@@ -12,17 +12,13 @@ class CGLibPy_Line(object):
     def createMidPt(self):
         self.midpt = CGLibPy_Point((self.startPt.X + self.endPt.X)/2,
                                    (self.startPt.Y + self.endPt.Y)/2,
-                                   (self.startPt.Z + self.endPt.Z)/2,)
+                                   (self.startPt.Z + self.endPt.Z)/2)
 
     def createVector(self):
         self.vec = CGLibPy_Vector([self.startPt,self.endPt])
 
     def calcLength(self):
-        self.lineLen = math.sqrt((self.endPt.X - self.startPt.X)*(self.endPt.X - self.startPt.X)
-                                +
-                                (self.endPt.Y - self.startPt.Y)*(self.endPt.Y - self.startPt.Y)
-                                +
-                                (self.endPt.Z - self.startPt.Z)*(self.endPt.Z - self.startPt.Z))
+        self.lineLen = giveLength2Pts(self.startPt,self.endPt)
 
     def __init__(self,_args):
         if len(_args) == 2:

@@ -1,4 +1,4 @@
-import math
+from .CGLibPy_Utility import *
 
 class CGLibPy_Vector(object):
     I = 0.0
@@ -15,11 +15,7 @@ class CGLibPy_Vector(object):
             self.I = _args[1].X - _args[0].X
             self.J = _args[1].Y - _args[0].Y
             self.K = _args[1].Z - _args[0].Z
-            self.vecLen = math.sqrt((_args[1].X - _args[0].X)*(_args[1].X - _args[0].X)
-                                    +
-                                    (_args[1].Y - _args[0].Y)*(_args[1].Y - _args[0].Y)
-                                    +
-                                    (_args[1].Z - _args[0].Z)*(_args[1].Z - _args[0].Z))
+            self.vecLen = giveLength2Pts(_args[0],_args[1])
             self.I = self.I/self.vecLen
             self.J = self.J/self.vecLen
             self.K = self.K/self.vecLen
