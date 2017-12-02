@@ -18,7 +18,14 @@ class CGLibPy_Line(object):
         self.vec = CGLibPy_Vector([self.startPt,self.endPt])
 
     def calcLength(self):
-        self.lineLen = giveLength2Pts(self.startPt,self.endPt)
+        self.lineLen = dist2Pts(self.startPt,self.endPt)
+
+    def pointOnLine(self,param):
+        x = self.startPt.X + (self.endPt.X - self.startPt.X)*param
+        y = self.startPt.Y + (self.endPt.Y - self.startPt.Y)*param
+        z = self.startPt.Z + (self.endPt.Z - self.startPt.Z)*param
+
+        return (CGLibPy_Point(x,y,z))
 
     def __init__(self,_args):
         if len(_args) == 2:
