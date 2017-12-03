@@ -190,6 +190,46 @@ def ccwOrcwXZ(point0,point1,point2):
 
 def SideOfThePointToLineXZ(line,point):
     return ccwOrcwXZ(line.startPt,line.endPt,point)
+
+def square(f):
+    return f * f
+
+def arcOrSphereLineIntersection(point1, point2, arcCenter, r):
+    '''
+    Inspired from http://paulbourke.net/geometry/circlesphere/index.html#linesphere
+    '''
+    p1 = p2 = None
+    u1 = u2 = None
+    intersectPts = 0
+
+    a = square(point2.X - point1.X) + square(point2.Y - point1.Y) + square(point2.Z - point1.Z)
+    b = 2.0 * ((point2.X - point1.X) * (point1.X - arcCenter.X) +
+               (point2.Y - point1.Y) * (point1.Y - arcCenter.Y) +
+               (point2.Z - point1.Z) * (point1.Z - arcCenter.Z))
+
+    c = (square(arcCenter.X) + square(arcCenter.Y) + square(arcCenter.Z) + square(point1.X) +
+            square(point1.Y) + square(point1.Z) -
+            2.0 * (arcCenter.X * point1.X + arcCenter.Y * point1.Y + arcCenter.Z * point1.Z) - square(r))
+
+    i = b * b - 4.0 * a * c
+
+    if i < 0.0:
+        intersect = 0
+    elif i == 0.0:
+        # one intersection
+        u1 = -b / (2.0 * a)
+        intersectPts = 1
+
+    elif i > 0.0:
+        intersectPts = 2
+        # first intersection
+        u1 = (-b + math.sqrt(i)) / (2.0 * a)
+        # second intersection
+        u2 = (-b - math.sqrt(i)) / (2.0 * a)
+
+    return intersectPts,u1,u2
     
+def arcLineIntersection(line,arc):
+    return arcOrSphereLineIntersection(line.startPt,line.endPt,arc.centrePt,arc.radius)
     
 

@@ -14,6 +14,11 @@ line5 = CGLibPy.CGLibPy_Line([4.56,-12.345,34.126546,-98.5,10,54.005])
 line6 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0]) 
 line7 = CGLibPy.CGLibPy_Line([0,0,0,0,0,10]) 
 
+arc1 = CGLibPy.CGLibPy_Arc( [CGLibPy.CGLibPy_Point(0,0,0),
+                            CGLibPy.CGLibPy_Point(-5,0,0),
+                            CGLibPy.CGLibPy_Point(5,0,0),
+                            5, True])
+
 point1 = CGLibPy.CGLibPy_Point(2,5,7)
 point2 = CGLibPy.CGLibPy_Point(-2,5,7)
 point3 = CGLibPy.CGLibPy_Point(2,5,7)
@@ -35,6 +40,9 @@ print(str(linePt.X) + " " + str(linePt.Y) + " " + str(linePt.Z))
 print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineXY(line6,point2))
 print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineYZ(line7,point3))
 print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineXZ(line7,point2))
+
+inter,u,v = CGLibPy.CGLibPy_Utility.arcLineIntersection(line6,arc1)
+print(inter)
 
 
 
