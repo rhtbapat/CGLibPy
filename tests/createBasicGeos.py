@@ -11,6 +11,13 @@ line2 = CGLibPy.CGLibPy_Line([10,10,0,10,10,20])
 line3 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0])
 line4 = CGLibPy.CGLibPy_Line([10,0,0,10,10,0])
 line5 = CGLibPy.CGLibPy_Line([4.56,-12.345,34.126546,-98.5,10,54.005]) 
+line6 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0]) 
+line7 = CGLibPy.CGLibPy_Line([0,0,0,0,0,10]) 
+
+point1 = CGLibPy.CGLibPy_Point(2,5,7)
+point2 = CGLibPy.CGLibPy_Point(-2,5,7)
+point3 = CGLibPy.CGLibPy_Point(2,5,7)
+
 
 print(point.X)
 print(line.startPt.Z)
@@ -25,4 +32,9 @@ intPt = line.intersectionPoint(line4)
 print(intPt.X)
 linePt = line5.pointAtDistAlongLine(45.342)
 print(str(linePt.X) + " " + str(linePt.Y) + " " + str(linePt.Z))
+print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineXY(line6,point2))
+print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineYZ(line7,point3))
+print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineXZ(line7,point2))
+
+
 

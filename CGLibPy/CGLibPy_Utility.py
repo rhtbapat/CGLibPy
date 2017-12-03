@@ -145,6 +145,51 @@ def pointAtDistAlongUnitVector(startPt,unitVec,dist):
 
     return pX,pY,pZ
 
+def ccwWithDet(d1,d2,d3,d4):
+    #Left or CCW side
+    if (d1*d4 > d2*d3):
+        return 1
+    #Right or CW side
+    if (d1*d4 < d2*d3):
+        return -1
+    #Right or CW side
+    if ((d1*d3 < 0) or (d2*d4 < 0)):
+        return -1
+    #Left or CCW side
+    if ((d1*d1 + d2*d2) < (d3*d3 + d4*d4)):
+        return 1
+    #On the line
+    return 0 
+
+def ccwOrcwXY(point0,point1,point2):
+    dx1 = point1.X - point0.X
+    dy1 = point1.Y - point0.Y
+    dx2 = point2.X - point0.X 
+    dy2 = point2.Y - point0.Y
+    return ccwWithDet(dx1,dy1,dx2,dy2)
+
+def SideOfThePointToLineXY(line,point):
+    return ccwOrcwXY(line.startPt,line.endPt,point)
+
+def ccwOrcwYZ(point0,point1,point2):
+    dx1 = point1.Y - point0.Y
+    dy1 = point1.Z - point0.Z
+    dx2 = point2.Y - point0.Y 
+    dy2 = point2.Z - point0.Z
+    return ccwWithDet(dx1,dy1,dx2,dy2)
+
+def SideOfThePointToLineYZ(line,point):
+    return ccwOrcwYZ(line.startPt,line.endPt,point)
+
+def ccwOrcwXZ(point0,point1,point2):
+    dx1 = point1.X - point0.X
+    dy1 = point1.Z - point0.Z
+    dx2 = point2.X - point0.X 
+    dy2 = point2.Z - point0.Z
+    return ccwWithDet(dx1,dy1,dx2,dy2)
+
+def SideOfThePointToLineXZ(line,point):
+    return ccwOrcwXZ(line.startPt,line.endPt,point)
     
     
 
