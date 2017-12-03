@@ -27,6 +27,13 @@ class CGLibPy_Line(object):
 
         return (CGLibPy_Point(x,y,z))
 
+    def intersectionPoint(self,line):
+        intPoint = None
+        intersect,u,v = lineLineIntersection3D(self,line)
+        if(intersect == True):
+            intPoint = line.pointOnLine(v)
+        return intPoint
+        
     def __init__(self,_args):
         if len(_args) == 2:
             self.startPt = _args[0]
