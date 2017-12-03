@@ -15,9 +15,16 @@ class CGLibPy_Vector(object):
             self.I = _args[1].X - _args[0].X
             self.J = _args[1].Y - _args[0].Y
             self.K = _args[1].Z - _args[0].Z
+        self.vecLen = math.sqrt(self.I*self.I + self.J*self.J + self.K*self.K)
 
-    def normalize():
-        self.vecLen = dist2Pts(_args[0],_args[1])
+    def normalize(self):        
         self.I = self.I/self.vecLen
         self.J = self.J/self.vecLen
         self.K = self.K/self.vecLen
+
+    def unitVector(self):
+        i = self.I/self.vecLen
+        j = self.J/self.vecLen
+        k = self.K/self.vecLen
+        unitVec = CGLibPy_Vector([i,j,k])
+        return unitVec

@@ -138,6 +138,13 @@ def lineLineIntersection3D(line1,line2):
 
     return intersect,u,v
         
+def pointAtDistAlongUnitVector(startPt,unitVec,dist):
+    pX = startPt.X + unitVec.I * dist
+    pY = startPt.Y + unitVec.J * dist
+    pZ = startPt.Z + unitVec.K * dist
+
+    return pX,pY,pZ
+
     
     
 

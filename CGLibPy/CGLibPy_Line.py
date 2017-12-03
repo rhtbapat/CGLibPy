@@ -33,6 +33,11 @@ class CGLibPy_Line(object):
         if(intersect == True):
             intPoint = line.pointOnLine(v)
         return intPoint
+
+    def pointAtDistAlongLine(self,dist):
+        x,y,z = pointAtDistAlongUnitVector(self.startPt, self.vec.unitVector(), dist)
+        point = CGLibPy_Point(x,y,z)
+        return point
         
     def __init__(self,_args):
         if len(_args) == 2:
