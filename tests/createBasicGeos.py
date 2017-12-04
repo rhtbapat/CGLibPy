@@ -21,7 +21,8 @@ arc1 = CGLibPy.CGLibPy_Arc( [CGLibPy.CGLibPy_Point(0,0,0),
 
 point1 = CGLibPy.CGLibPy_Point(2,5,7)
 point2 = CGLibPy.CGLibPy_Point(-2,5,7)
-point3 = CGLibPy.CGLibPy_Point(2,5,7)
+point3 = CGLibPy.CGLibPy_Point(2,5,17)
+point4 = CGLibPy.CGLibPy_Point(12,-5,17)
 
 
 print(point.X)
@@ -43,6 +44,9 @@ print(CGLibPy.CGLibPy_Utility.SideOfThePointToLineXZ(line7,point2))
 
 inter,u,v = CGLibPy.CGLibPy_Utility.arcLineIntersection(line6,arc1)
 print(inter)
+
+polygon = CGLibPy.CGLibPy_Polygon([point1,point2,point3,point4],1)
+polygon.entities
 
 
 
