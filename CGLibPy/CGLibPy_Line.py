@@ -47,6 +47,10 @@ class CGLibPy_Line(object):
             self.startPt = CGLibPy_Point(_args[0],_args[1],_args[2])
             self.endPt = CGLibPy_Point(_args[3],_args[4],_args[5])
         
+        if self.startPt != None and self.endPt != None:
+            self.startPt.addConnectedCurve(self)
+            self.endPt.addConnectedCurve(self)
+        
         self.createMidPt()
         self.createVector()
         self.calcLength()

@@ -22,9 +22,15 @@ class CGLibPy_Polygon(object):
         for i in range (0,len(self.points)-1):
             pt1 = self.points[i]
             pt2 = self.points[i+1]
-            self.entities.append(CGLibPy_Line([pt1,pt2]))
+            line = CGLibPy_Line([pt1,pt2])
+            self.entities.append(line)
+            pt1.addConnectedCurve(line)
+            pt2.addConnectedCurve(line)
         pt1 = self.points[len(self.points)-1]
         pt2 = self.points[0]
-        self.entities.append(CGLibPy_Line([pt1,pt2]))
+        line = CGLibPy_Line([pt1,pt2])
+        self.entities.append(line)
+        pt1.addConnectedCurve(line)
+        pt2.addConnectedCurve(line)
             
     
