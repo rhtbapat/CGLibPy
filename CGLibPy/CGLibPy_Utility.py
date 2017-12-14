@@ -30,11 +30,9 @@ def ang2VectorsRadian(vec1,vec2):
     numer = dotProduct3D(vec1,vec2)
     denom = vectorLength(vec1)*vectorLength(vec2)
     ang = math.acos(numer/denom)
-    '''
-    while ang <= -M_PI:
-        ang = ang + M_2PI
-    return ang
-    '''
+    
+    while ang <= -pi:
+        ang = ang + 2*pi
     return ang
 
 def ang2VectorsDegree(vec1,vec2):

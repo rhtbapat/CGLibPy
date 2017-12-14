@@ -28,3 +28,17 @@ class CGLibPy_Vector(object):
         k = self.K/self.vecLen
         unitVec = CGLibPy_Vector([i,j,k])
         return unitVec
+
+    def isParallelVector(self,inputVec):
+        ang = ang2VectorsRadian(self,inputVec)
+        if math.isclose(ang,0):
+            return 1 # Same Direction
+        elif math.isclose(ang,pi):
+            return -1 # Opposite Direction
+        else:
+            return 0 # Not Parallel
+
+    
+            
+
+        
