@@ -10,5 +10,5 @@ class CGLibPy_Point(object):
         self.Z = zcoord
 
     def addConnectedCurve(self, curve):
-        if self.connectedCurves.index(curve) != ValueError:
+        if len(self.connectedCurves) == 0 or curve in self.connectedCurves:
             self.connectedCurves.append(curve)

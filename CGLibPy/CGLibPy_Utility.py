@@ -16,23 +16,29 @@ def dotProduct3D(vector1,vector2):
     dp = vector1.I*vector2.I + vector1.J*vector2.J + vector1.K*vector2.K 
     return dp
 
-def vectorLength(vec):
-    return math.sqrt(vec.I*vec.I + vec.J*vec.J + vec.K*vec.K)
+def vectorLengthIJK(I,J,K):
+    return math.sqrt(I*I + J*J + K*K)
 
-def crossProduct3D(vector1,vector2):
-    a = vector1.J*vector2.K-vector1.K*vector2.J
-    b = vector1.K*vector2.I-vector1.I*vector2.K
-    c = vector1.I*vector2.J-vector1.J*vector2.I
+def vectorLength(vec):
+    return vectorLengthIJK(vec.I,vec.J,vec.K)
+
+def crossProduct3DIJK(I1,J1,K1,I2,J2,K2):
+    a = J1*K2-K1*J2
+    b = K1*I2-I1*K2
+    c = I1*J2-J1*I2
     cp = [a,b,c]
     return cp
+
+def crossProduct3D(vector1,vector2):
+    return crossProduct3DIJK(vector1.I,vector1.J,vector1.K,vector2.I,vector2.J,vector.K)
 
 def ang2VectorsRadian(vec1,vec2):
     numer = dotProduct3D(vec1,vec2)
     denom = vectorLength(vec1)*vectorLength(vec2)
     ang = math.acos(numer/denom)
     
-    while ang <= -pi:
-        ang = ang + 2*pi
+    while ang <= -math.pi:
+        ang = ang + 2*math.pi
     return ang
 
 def ang2VectorsDegree(vec1,vec2):
@@ -54,13 +60,16 @@ def areVectorsPerpendicular(vec1,vec2):
 def areLinesPerpendicular(line1,line2):
     return areVectorsPerpendicular(line1.vec,line2.vec) 
 
-def areVectorsParallel(vec1,vec2):
-    cP = crossProduct3D(vec1,vec2)
+def areVectorsParallelIJK(I1,J1,K1,I2,J2,K2):
+    cP = crossProduct3DIJK(I1,J1,K1,I2,J2,K2)
     vecLen = math.sqrt(cP[0]*cP[0] + cP[1]*cP[1] + cP[2]*cP[2])
     if(math.isclose(vecLen,0.0)):
         return True
     else:
         return False
+
+def areVectorsParallel(vec1,vec2):
+    return areVectorsParallelIJK(vec1.I,vec1.J,vec1.K,vec2.I,vec2.J,vec2.K)
 
 def areLinesParallel(line1,line2):
     return areVectorsParallel(line1.vec,line2.vec)
@@ -69,6 +78,14 @@ def getDistance2DXY(point1,point2):
     d = sqrt(sqr(point2.X-point1.X) + sqr(point2.Y-point1.Y))
     return d
 
+def arePointsCollinear(pt1,pt2,pt3):
+    I1 = pt2.X - pt1.X
+    J1 = pt2.Y - pt2.Y
+    K1 = pt2.Z - pt2.Z
+    I2 = pt3.X - pt2.X
+    J2 = pt3.Y - pt2.Y
+    K2 = pt3.Z - pt2.Z
+    return areVectorsParallelIJK(I1,J1,K1,I2,J2,K2)
 
 def getDistance2DYZ(point1,point2):
     d = sqrt(sqr(point2.Y-point1.Y) + sqr(point2.Z-point1.Z))
@@ -79,22 +96,22 @@ def getDistance2DXZ(point1,point2):
     d = sqrt(sqr(point2.X-point1.X) + sqr(point2.Z-point1.Z))
     return d
 
-def lineLineIntersection3DPointsParameters(p1,p2,p3,p4):
-    p13X = p1.X - p3.X;
-    p13Y = p1.Y - p3.Y;
-    p13Z = p1.Z - p3.Z;
-    p43X = p4.X - p3.X;
-    p43Y = p4.Y - p3.Y;
-    p43Z = p4.Z - p3.Z;
+def lineLineIntersection3DCoordinatesParameters(X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3,X4,Y4,Z4):
+    p13X = X1 - X3
+    p13Y = Y1 - Y3
+    p13Z = Z1 - Z3
+    p43X = X4 - X3
+    p43Y = Y4 - Y3
+    p43Z = Z4 - Z3
 
     if (math.isclose(math.fabs(p43X),0.0) 
         and math.isclose(math.fabs(p43Y),0.0) 
         and math.isclose(math.fabs(p43Z),0.0)) :
         return false,-1,-1 #bool,u,v
 
-    p21X = p2.X - p1.X;
-    p21Y = p2.Y - p1.Y;
-    p21Z = p2.Z - p1.Z;
+    p21X = X2 - X1
+    p21Y = Y2 - Y1
+    p21Z = Z2 - Z1
 
     if (math.isclose(math.fabs(p21X),0.0) 
         and math.isclose(math.fabs(p21Y),0.0) 
@@ -119,6 +136,8 @@ def lineLineIntersection3DPointsParameters(p1,p2,p3,p4):
 
     return True,u,v
 
+def lineLineIntersection3DPointsParameters(p1,p2,p3,p4):
+    return lineLineIntersection3DCoordinatesParameters(p1.X,p1.Y,p1.Z,p2.X,p2.Y,p2.Z,p3.X,p3.Y,p3.Z,p4.X,p4.Y,p4.Z)
 
 def lineLineIntersection3D(line1,line2):
     intersect,u,v = lineLineIntersection3DPointsParameters(line1.startPt,line1.endPt,line2.startPt,line2.endPt)
@@ -229,5 +248,113 @@ def arcOrSphereLineIntersection(point1, point2, arcCenter, r):
     
 def arcLineIntersection(line,arc):
     return arcOrSphereLineIntersection(line.startPt,line.endPt,arc.centrePt,arc.radius)
+
+def arcThroughThreePoints(pt1,pt2,pt3):
+    arcPossible = False
+    centre = None
+    radius = 0
+    sweepAng = 0
+    startPt = None
+    endPt = None
+
+    tempPt1 = pt1
+    tempPt2 = pt2
+    tempPt3 = pt3
+
+    I1 = pt2.X - pt1.X
+    J1 = pt2.Y - pt2.Y
+    K1 = pt2.Z - pt2.Z
+    I2 = pt3.X - pt2.X
+    J2 = pt3.Y - pt2.Y
+    K2 = pt3.Z - pt2.Z
+
+    midPt1X = (pt1.X+pt2.X)/2
+    midPt1Y = (pt1.Y+pt2.Y)/2
+    midPt1Z = (pt1.Z+pt2.Z)/2
+
+    midPt2X = (pt2.X+pt3.X)/2
+    midPt2Y = (pt2.Y+pt3.Y)/2
+    midPt2Z = (pt2.Z+pt3.Z)/2
+
+    selectedPlane = "XY"
+    tempVecLen = math.sqrt(square(I1)+square(J1))
+    tempVec1 = [I1/tempVecLen,J1/tempVecLen,0]
+    tempPerpVec1 = [J1/tempVecLen,I1/tempVecLen,0]
+    tempVec2Len = math.sqrt(square(I2)+square(J2))
+    tempVec2 = [I2/tempVecLen,J2/tempVecLen,0]
+    tempPerpVec2 = [J2/tempVecLen,I2/tempVecLen,0]
+    tempPt1.Z = 0
+    tempPt2.Z = 0
+    tempPt3.Z = 0
+
+    if (areVectorsParallelIJK(I1,J1,K1,I2,J2,K2) != True):
+        return False,None
+    else:
+        cP = crossProduct3DIJK(I1,J1,K1,I2,J2,K2)
+        if (math.isclose(cP.J,0) and math.isclose(cP.K,0)):
+            selectedPlane = "YZ"
+            tempVecLen = math.sqrt(square(J1)+square(K1))
+            tempVec1 = [0,J1/tempVecLen,K1/tempVecLen]
+            tempPerpVec1 = [0,K1/tempVecLen,J1/tempVecLen]
+            tempVec2Len = math.sqrt(square(J2)+square(K2))
+            tempVec2 = [0,J2/tempVecLen,K2/tempVecLen]
+            tempPerpVec2 = [0,K2/tempVecLen,J2/tempVecLen]
+            tempPt1.X = 0
+            tempPt2.X = 0
+            tempPt3.X = 0
+        elif (math.isclose(cP.I,0) and math.isclose(cP.K,0)):
+            selectedPlane = "XZ"
+            tempVecLen = math.sqrt(square(I1)+square(K1))
+            tempVec1 = [I1/tempVecLen,0,K1/tempVecLen]
+            tempPerpVec1 = [K1/tempVecLen,0,I1/tempVecLen]
+            tempVec2Len = math.sqrt(square(I2)+square(K2))
+            tempVec2 = [I2/tempVecLen,0,K2/tempVecLen]
+            tempPerpVec2 = [K2/tempVecLen,0,I2/tempVecLen]
+            tempPt1.Y = 0
+            tempPt2.Y = 0
+            tempPt3.Y = 0
+    
+    tempDist = 1
+    tempPt1X = midPt1X + tempPerpVec1[0]*tempDist
+    tempPt1Y = midPt1Y + tempPerpVec1[1]*tempDist
+    tempPt1Z = midPt1Z + tempPerpVec1[2]*tempDist
+
+    tempPt2X = midPt2X + tempPerpVec2[0]*tempDist
+    tempPt2Y = midPt2Y + tempPerpVec2[1]*tempDist
+    tempPt2Z = midPt2Z + tempPerpVec2[2]*tempDist
+
+    inter,u,v = lineLineIntersection3DCoordinatesParameters(midPt1X,midPt1Y,midPt1Z,tempPt1X,tempPt1Y,tempPt1Z,midPt2X,midPt2Y,midPt2Z,tempPt2X,tempPt2Y,tempPt2Z)
+    if (inter):
+        interPtX = midPt1X + (tempPt1X-midPt1X)*u   
+        interPtY = midPt1Y + (tempPt1Y-midPt1Y)*u
+        interPtZ = midPt1Z + (tempPt1Z-midPt1Z)*u
+
+        tempInter,tempU,tempV = lineLineIntersection3DCoordinatesParameters(tempPt1.X,tempPt1.Y,tempPt1.Z,interPtX,interPtY,interPtZ,tempPt2.X,tempPt2.Y,tempPt2.Z,tempPt3.X,tempPt3.Y,tempPt3.Z)
+        tempInterPtX = tempPt3.X + (interPtX - tempPt3.X)*tempU
+        tempInterPtY = tempPt3.Y + (interPtY - tempPt3.Y)*tempU
+        tempInterPtZ = tempPt3.Z + (interPtZ - tempPt3.Z)*tempU
+
+        dist1 = distCoords(tempPt2.X,tempPt2.Y,tempPt2.Z,tempPt3.X,tempPt3.Y,tempPt3.Z)
+        dist2 = distCoords(tempPt2.X,tempPt2.Y,tempPt2.Z,tempInterPtX,tempInterPtY,tempInterPtZ)
+        ratio1 = dist2/dist1
+        dist3 = distCoords(tempPt1.X,tempPt1.Y,tempPt1.Z,tempInterPtX,tempInterPtY,tempInterPtZ)
+        dist4 = distCoords(tempPt1.X,tempPt1.Y,tempPt1.Z,interPtX,interPtY,interPtZ)
+        ratio2 = dist4/dist3
+
+        actualPt23X = pt2.X + (pt3.X-pt2.X)*ratio1
+        actualPt23Y = pt2.Y + (pt3.Y-pt2.Y)*ratio1
+        actualPt23Z = pt2.Z + (pt3.Z-pt2.Z)*ratio1
+
+        centreArcX = pt1.X + (actualPt23X-pt1.X)*ratio2
+        centreArcY = pt1.Y + (actualPt23Y-pt1.Y)*ratio2
+        centreArcZ = pt1.Z + (actualPt23Z-pt1.Z)*ratio2
+
+        radius = distCoords(centreArcX,centreArcY,centreArcZ,pt1.X,pt1.Y,pt1.Z)
+    else:
+        return False,None
+            
+
+
+
     
 
