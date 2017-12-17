@@ -38,7 +38,12 @@ class CGLibPy_Vector(object):
         else:
             return 0 # Not Parallel
 
-    
+    def isPerpendicularVector(self,inputVec):
+        dotProd = dotProduct3D(self,inputVec)
+        if math.isclose(ang,0):
+            return True
+        else:
+            return False
             
 
         
