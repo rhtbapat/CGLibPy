@@ -353,7 +353,7 @@ def arcThroughThreePoints(pt1,pt2,pt3):
     else:
         return False,None
 
-def lineLineIntersection2DXYCoordinates(x1,y1,x2,y2,x3,y3,x4,y4):
+def lineLineIntersection2DCoordinates(x1,y1,x2,y2,x3,y3,x4,y4):
     det = (y4-y3)*(x2-x1) - (x4-x3)*(y2-y1)
     if math.isclose(det,0):
         return False,0,0 #Bool,u,v
@@ -362,12 +362,33 @@ def lineLineIntersection2DXYCoordinates(x1,y1,x2,y2,x3,y3,x4,y4):
 
     return True,u,v
 
-
 def lineLineIntersection2DXYPoints(point1,point2,point3,point4):
-    return lineLineIntersection2DXYCoordinates(point1.X,point1.Y,point2.X,point2.Y,point3.X,point3.Y,point4.X,point4.Y)
+    return lineLineIntersection2DCoordinates(point1.X,point1.Y,point2.X,point2.Y,point3.X,point3.Y,point4.X,point4.Y)
             
 def lineLineIntersection2DXY(line1,line2):
     return lineLineIntersection2DXYPoints(line1.startPt,line1.endPt,line2.startPt,line2.endPt)
+
+def lineLineIntersection2DYZPoints(point1,point2,point3,point4):
+    return lineLineIntersection2DCoordinates(point1.Y,point1.Z,point2.Y,point2.Z,point3.Y,point3.Z,point4.Y,point4.Z)
+            
+def lineLineIntersection2DYZ(line1,line2):
+    return lineLineIntersection2DYZPoints(line1.startPt,line1.endPt,line2.startPt,line2.endPt)
+
+def lineLineIntersection2DXZPoints(point1,point2,point3,point4):
+    return lineLineIntersection2DCoordinates(point1.X,point1.Z,point2.X,point2.Z,point3.X,point3.Z,point4.X,point4.Z)
+            
+def lineLineIntersection2DXZ(line1,line2):
+    return lineLineIntersection2DXYPoints(line1.startPt,line1.endPt,line2.startPt,line2.endPt)
+
+def lineLineIntersection2D(line1,line2,plane="XY"):
+    if plane == "XY":
+        return lineLineIntersection2DXY(line1,line2)
+    elif plane == "YZ":
+        return lineLineIntersection2DYZ(line1,line2)
+    else:
+        return lineLineIntersection2DXZ(line1,line2)
+        
+
 
 
     
