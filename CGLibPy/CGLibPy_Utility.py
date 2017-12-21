@@ -107,7 +107,7 @@ def lineLineIntersection3DCoordinatesParameters(X1,Y1,Z1,X2,Y2,Z2,X3,Y3,Z3,X4,Y4
     if (math.isclose(math.fabs(p43X),0.0) 
         and math.isclose(math.fabs(p43Y),0.0) 
         and math.isclose(math.fabs(p43Z),0.0)) :
-        return false,-1,-1 #bool,u,v
+        return False,-1,-1 #bool,u,v
 
     p21X = X2 - X1
     p21Y = Y2 - Y1
@@ -352,8 +352,22 @@ def arcThroughThreePoints(pt1,pt2,pt3):
         radius = distCoords(centreArcX,centreArcY,centreArcZ,pt1.X,pt1.Y,pt1.Z)
     else:
         return False,None
-            
 
+def lineLineIntersection2DXYCoordinates(x1,y1,x2,y2,x3,y3,x4,y4):
+    det = (y4-y3)*(x2-x1) - (x4-x3)*(y2-y1)
+    if math.isclose(det,0):
+        return False,0,0 #Bool,u,v
+    u = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3))/det
+    v = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3))/det
+
+    return True,u,v
+
+
+def lineLineIntersection2DXYPoints(point1,point2,point3,point4):
+    return lineLineIntersection2DXYCoordinates(point1.X,point1.Y,point2.X,point2.Y,point3.X,point3.Y,point4.X,point4.Y)
+            
+def lineLineIntersection2DXY(line1,line2):
+    return lineLineIntersection2DXYPoints(line1.startPt,line1.endPt,line2.startPt,line2.endPt)
 
 
     
