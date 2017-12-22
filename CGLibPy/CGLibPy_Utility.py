@@ -71,6 +71,15 @@ def areVectorsParallelIJK(I1,J1,K1,I2,J2,K2):
 def areVectorsParallel(vec1,vec2):
     return areVectorsParallelIJK(vec1.I,vec1.J,vec1.K,vec2.I,vec2.J,vec2.K)
 
+def areLinesParallelCoordinates(point1,point2,point3,point4):
+    I1 = point2[0]-point1[0]
+    J1 = point2[1]-point1[1]
+    K1 = point2[2]-point1[2]
+    I2 = point4[0]-point3[0]
+    J2 = point4[1]-point3[1]
+    K2 = point4[2]-point3[2]
+    return areVectorsParallelIJK(I1,J1,K1,I2,J2,K2)
+
 def areLinesParallel(line1,line2):
     return areVectorsParallel(line1.vec,line2.vec)
 
@@ -387,7 +396,49 @@ def lineLineIntersection2D(line1,line2,plane="XY"):
         return lineLineIntersection2DYZ(line1,line2)
     else:
         return lineLineIntersection2DXZ(line1,line2)
-        
+
+def lineLineIntersection3DUsingCrossProduct(line1,line2):
+    selectedPlane = "XY"
+    parallelOnAllPlanes = 0
+
+    if(line1.startPt.samePoint(line2.startPt)):
+        return True,0.0,0.0
+    elif (line1.startPt.samePoint(line2.endPt)):
+        return True,0.0,1.0
+    elif (line1.endPt.samePoint(line2.startPt)):
+        return True,1.0,0.0
+    elif (line1.endPt.samePoint(line2.endPt)):
+        return True,1.0,1.0
+
+    tempLine1 = line1
+    tempLine2 = line2
+    # Eliminate XY plane
+    tempPt1 = [line1.startPt.X,line1.startPt.Y,0]
+    tempPt2 = [line1.endPt.X,line1.endPt.Y,0]
+    tempPt3 = [line2.startPt.X,line2.startPt.Y,0]
+    tempPt4 = [line2.endPt.X,line2.endPt.Y,0]
+    if areLinesParallelCoordinates(tempPt1,tempPt2,tempPt3,tempPt4):
+        if parallelOnAllPlanes == 0:
+            parallelOnAllPlanes = parallelOnAllPlanes + 1
+        selectedPlane = "YZ"
+    tempPt1 = [0,line1.startPt.Y,line1.startPt.Z]
+    tempPt2 = [0,line1.endPt.Y,line1.endPt.Z]
+    tempPt3 = [0,line2.startPt.Y,line2.startPt.Z]
+    tempPt4 = [0,line2.endPt.Y,line2.endPt.Z]
+    if areLinesParallelCoordinates(tempPt1,tempPt2,tempPt3,tempPt4):
+        if parallelOnAllPlanes == 1:
+            parallelOnAllPlanes = parallelOnAllPlanes + 1
+        selectedPlane = "XZ"
+    # Eliminate XZ plane
+    tempPt1 = [line1.startPt.X,0,line1.startPt.Z]
+    tempPt2 = [line1.endPt.X,0,line1.endPt.Z]
+    tempPt3 = [line2.startPt.X,0,line2.startPt.Z]
+    tempPt4 = [line2.endPt.X,0,line2.endPt.Z]
+    if areLinesParallelCoordinates(tempPt1,tempPt2,tempPt3,tempPt4):
+        if parallelOnAllPlanes == 2:
+            return False,0,0
+
+    return lineLineIntersection2D(line1,line2,selectedPlane)
 
 
 
