@@ -15,7 +15,7 @@ line6 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0])
 line7 = CGLibPy.CGLibPy_Line([0,0,0,0,0,10])
 
 line8 = CGLibPy.CGLibPy_Line([0,0,0,10,10,10]) 
-line9 = CGLibPy.CGLibPy_Line([5,5,0,5,5,10])   
+line9 = CGLibPy.CGLibPy_Line([5,5,0,12,12,12])   
 
 arc1 = CGLibPy.CGLibPy_Arc( [CGLibPy.CGLibPy_Point(0,0,0),
                             CGLibPy.CGLibPy_Point(-5,0,0),
@@ -51,6 +51,8 @@ print(inter)
 
 polygon = CGLibPy.CGLibPy_Polygon([point1,point2,point3,point4],1)
 polygon.entities
+
+print(CGLibPy.CGLibPy_Utility.lineProjectOnLine(line8,line9))
 
 
 

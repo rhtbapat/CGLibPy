@@ -96,10 +96,19 @@ def arePointsCollinear(pt1,pt2,pt3):
     K2 = pt3.Z - pt2.Z
     return areVectorsParallelIJK(I1,J1,K1,I2,J2,K2)
 
+def vectorProjectOnVector(sourceVec,targetVec):
+    ang = ang2VectorsRadian(sourceVec,targetVec)
+    normVec2 = targetVec.unitVector()
+    vecLen = vectorLength(sourceVec)
+    val = vecLen*math.cos(ang)
+    return (normVec2.I*val,normVec2.J*val,normVec2.K*val)
+
+def lineProjectOnLine(sourceLine,targetLine):
+    return vectorProjectOnVector(sourceLine.vec,targetLine.vec)
+
 def getDistance2DYZ(point1,point2):
     d = sqrt(sqr(point2.Y-point1.Y) + sqr(point2.Z-point1.Z))
     return d
-
 
 def getDistance2DXZ(point1,point2):
     d = sqrt(sqr(point2.X-point1.X) + sqr(point2.Z-point1.Z))
