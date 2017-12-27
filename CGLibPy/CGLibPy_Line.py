@@ -40,10 +40,10 @@ class CGLibPy_Line(object):
         return point
         
     def __init__(self,_args):
-        if len(_args) == 2:
+        if len(_args) == 2: #Two Points
             self.startPt = _args[0]
             self.endPt = _args[1]
-        elif len(_args) == 6:
+        elif len(_args) == 6: # 6 Coordinates
             self.startPt = CGLibPy_Point(_args[0],_args[1],_args[2])
             self.endPt = CGLibPy_Point(_args[3],_args[4],_args[5])
         
