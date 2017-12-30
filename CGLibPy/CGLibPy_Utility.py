@@ -1,20 +1,17 @@
 import math
 
 def distCoords(X1,Y1,Z1,X2,Y2,Z2):
-    lineLen = math.sqrt((X2 - X1)*(X2 - X1)
-                        +
-                        (Y2 - Y1)*(Y2 - Y1)
-                        +
-                        (Z2 - Z1)*(Z2 - Z1))
-    return lineLen
-
+    return math.sqrt(math.pow(X2-X1,2)+math.pow(Y2-Y1,2)+math.pow(Z2-Z1,2))
 
 def dist2Pts(startPt,endPt):
     return distCoords(startPt.X,startPt.Y,startPt.Z,endPt.X,endPt.Y,endPt.Z)
 
-def dotProduct3D(vector1,vector2):
-    dp = vector1.I*vector2.I + vector1.J*vector2.J + vector1.K*vector2.K 
+def dotProduct3DIJK(I1,J1,K1,I2,J2,K2):
+    dp = I1*I2 + J1*J2 + K1*K2 
     return dp
+
+def dotProduct3D(vector1,vector2):
+    return dotProduct3DIJK(vector1.I,vector1.J,vector1.K,vector2.I,vector2.J,vector2.K)
 
 def vectorLengthIJK(I,J,K):
     return math.sqrt(I*I + J*J + K*K)

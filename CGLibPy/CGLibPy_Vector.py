@@ -7,11 +7,11 @@ class CGLibPy_Vector(object):
     vecLen = 0.0  
 
     def __init__(self,_args):
-        if len(_args) == 3:
+        if len(_args) == 3: # Three Coefficients
             self.I = _args[0]
             self.J = _args[1]
             self.K = _args[2]
-        elif len(_args) == 2:
+        elif len(_args) == 2: # Six Coordinates
             self.I = _args[1].X - _args[0].X
             self.J = _args[1].Y - _args[0].Y
             self.K = _args[1].Z - _args[0].Z
