@@ -184,12 +184,12 @@ def ccwWithDet(d1,d2,d3,d4):
     #Right or CW side
     if (d1*d4 < d2*d3):
         return -1
-    #Right or CW side
+    '''#Right or CW side
     if ((d1*d3 < 0) or (d2*d4 < 0)):
         return -1
     #Left or CCW side
     if ((d1*d1 + d2*d2) < (d3*d3 + d4*d4)):
-        return 1
+        return 1'''
     #On the line
     return 0 
 
