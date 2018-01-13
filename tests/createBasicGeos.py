@@ -7,7 +7,7 @@ import CGLibPy
 point = CGLibPy.CGLibPy_Point(10,20,30)
 
 line = CGLibPy.CGLibPy_Line([0,0,0,10,0,0])
-line2 = CGLibPy.CGLibPy_Line([10,10,0,10,10,20])
+line2 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0])
 line3 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0])
 line4 = CGLibPy.CGLibPy_Line([10,0,0,10,10,0])
 line5 = CGLibPy.CGLibPy_Line([4.56,-12.345,34.126546,-98.5,10,54.005]) 

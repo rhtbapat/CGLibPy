@@ -26,13 +26,30 @@ def crossProduct3DIJK(I1,J1,K1,I2,J2,K2):
     cp = [a,b,c]
     return cp
 
+def matrixModule2Vectors(vector1,vector2):
+    return module3x2matrix(vector1.I,vector1.J,vector1.K,vector2.I,vector2.J,vector2.K)
+
+def module3x2matrix(I1,J1,K1,I2,J2,K2):
+    cp = crossProduct3DIJK(I1,J1,K1,I2,J2,K2)
+    matrixMod = cp[0] + cp[1] + cp[2] 
+    return matrixMod
+
 def crossProduct3D(vector1,vector2):
-    return crossProduct3DIJK(vector1.I,vector1.J,vector1.K,vector2.I,vector2.J,vector.K)
+    return crossProduct3DIJK(vector1.I,vector1.J,vector1.K,vector2.I,vector2.J,vector2.K)
 
 def ang2VectorsRadian(vec1,vec2):
+    ang = 0
     numer = dotProduct3D(vec1,vec2)
-    denom = vectorLength(vec1)*vectorLength(vec2)
-    ang = math.acos(numer/denom)
+    #denom = vectorLength(vec1)*vectorLength(vec2)
+    #ang = math.acos(numer/denom)
+    matMod = matrixModule2Vectors(vec1,vec2)
+    if math.isclose(numer,0):
+        if matMod < 0:
+            ang = 3*math.pi/2
+        else:            
+            ang = math.pi/2
+    else:
+        ang = math.atan(matMod/numer)
     
     while ang <= -math.pi:
         ang = ang + 2*math.pi
