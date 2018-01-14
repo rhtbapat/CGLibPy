@@ -5,20 +5,20 @@ from .CGLibPy_Utility import *
 class CGLibPy_Line(object):
     startPt = None
     endPt = None
-    midpt = None
-    vec = None
-    lineLen = 0.0
 
-    def createMidPt(self):
-        self.midpt = CGLibPy_Point((self.startPt.X + self.endPt.X)/2,
-                                   (self.startPt.Y + self.endPt.Y)/2,
-                                   (self.startPt.Z + self.endPt.Z)/2)
+    def getMidPt(self):
+        midpt = CGLibPy_Point((self.startPt.X + self.endPt.X)/2,
+                                (self.startPt.Y + self.endPt.Y)/2,
+                                (self.startPt.Z + self.endPt.Z)/2)
+        return midpt
 
-    def createVector(self):
-        self.vec = CGLibPy_Vector([self.startPt,self.endPt])
+    def getVector(self):
+        vec = CGLibPy_Vector([self.startPt,self.endPt])
+        return vec
 
-    def calcLength(self):
-        self.lineLen = dist2Pts(self.startPt,self.endPt)
+    def getLength(self):
+        lineLen = dist2Pts(self.startPt,self.endPt)
+        return lineLen
 
     def pointOnLine(self,param):
         x = self.startPt.X + (self.endPt.X - self.startPt.X)*param
@@ -35,7 +35,7 @@ class CGLibPy_Line(object):
         return intPoint
 
     def pointAtDistAlongLine(self,dist):
-        x,y,z = pointAtDistAlongUnitVector(self.startPt, self.vec.unitVector(), dist)
+        x,y,z = pointAtDistAlongUnitVector(self.startPt, self.getVector().unitVector(), dist)
         point = CGLibPy_Point(x,y,z)
         return point
         
@@ -50,9 +50,5 @@ class CGLibPy_Line(object):
         if self.startPt != None and self.endPt != None:
             self.startPt.addConnectedCurve(self)
             self.endPt.addConnectedCurve(self)
-        
-        self.createMidPt()
-        self.createVector()
-        self.calcLength()
         
 

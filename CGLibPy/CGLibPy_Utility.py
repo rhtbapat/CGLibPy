@@ -48,6 +48,11 @@ def ang2VectorsRadian(vec1,vec2):
             ang = 3*math.pi/2
         else:            
             ang = math.pi/2
+    elif math.isclose(matMod,0):
+        if numer > 0:
+            ang = 0.0
+        else:            
+            ang = math.pi
     else:
         ang = math.atan(matMod/numer)
     
@@ -59,10 +64,10 @@ def ang2VectorsDegree(vec1,vec2):
     return math.degrees(ang2VectorsRadian(vec1,vec2))
 
 def ang2LinesRadian(line1,line2):
-    return ang2VectorsRadian(line1.vec,line2.vec)
+    return ang2VectorsRadian(line1.getVector(),line2.getVector())
 
 def ang2LinesDegrees(line1,line2):
-    return ang2VectorsDegree(line1.vec,line2.vec)
+    return ang2VectorsDegree(line1.getVector(),line2.getVector())
 
 def areVectorsPerpendicular(vec1,vec2):
     dP = dotProduct3D(vec1,vec2) 
@@ -72,7 +77,7 @@ def areVectorsPerpendicular(vec1,vec2):
         return False
 
 def areLinesPerpendicular(line1,line2):
-    return areVectorsPerpendicular(line1.vec,line2.vec) 
+    return areVectorsPerpendicular(line1.getVector(),line2.getVector()) 
 
 def areVectorsParallelIJK(I1,J1,K1,I2,J2,K2):
     cP = crossProduct3DIJK(I1,J1,K1,I2,J2,K2)
@@ -95,7 +100,7 @@ def areLinesParallelCoordinates(point1,point2,point3,point4):
     return areVectorsParallelIJK(I1,J1,K1,I2,J2,K2)
 
 def areLinesParallel(line1,line2):
-    return areVectorsParallel(line1.vec,line2.vec)
+    return areVectorsParallel(line1.getVector(),line2.getVector())
 
 def getDistance2DXY(point1,point2):
     d = sqrt(sqr(point2.X-point1.X) + sqr(point2.Y-point1.Y))
@@ -118,7 +123,7 @@ def vectorProjectOnVector(sourceVec,targetVec):
     return (normVec2.I*val,normVec2.J*val,normVec2.K*val)
 
 def lineProjectOnLine(sourceLine,targetLine):
-    return vectorProjectOnVector(sourceLine.vec,targetLine.vec)
+    return vectorProjectOnVector(sourceLine.getVector(),targetLine.getVector())
 
 def getDistance2DYZ(point1,point2):
     d = sqrt(sqr(point2.Y-point1.Y) + sqr(point2.Z-point1.Z))
