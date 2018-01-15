@@ -1,4 +1,4 @@
-![](http://cg.robasworld.com/wp-content/uploads/2017/12/CGHead165x120.png)
+![](http://cg.robasworld.com/wp-content/uploads/2017/12/CGHead525x363_InvertedColors-e1514445019623.png)
 
 Hello All ! I am Rohit Vijay Bapat a Software Developer by profession. I am a Mechanical Engineer and like Maths. I love Computational Geometry (that's why I am still learning it!) and Development. I have created this library for STUDY purpose only!
 
