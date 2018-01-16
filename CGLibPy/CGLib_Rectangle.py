@@ -17,3 +17,9 @@ class CGLibPy_Rectangle(CGLibPy_Polygon):
             if(input != None and len(input) == 4):
                 for entity in input:
                     self.entities.append(entity)
+
+    def translateBy(self,dx,dy,dz):
+        for pt in self.points:
+            pt.translateBy(dx,dy,dz)
+        for ln in self.entities:
+            ln.translateBy(dx,dy,dz)

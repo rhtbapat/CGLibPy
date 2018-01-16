@@ -21,4 +21,9 @@ class CGLibPy_Arc(object):
             self.endPt = _args[2]
             self.radius = _args[3]
             self.CCW = _args[4]
+
+    def translateBy(self,dx,dy,dz):
+        self.startPt.translateBy(dx,dy,dz)
+        self.endPt.translateBy(dx,dy,dz)
+        self.centrePt.translateBy(dx,dy,dz)
             

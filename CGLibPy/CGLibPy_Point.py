@@ -20,3 +20,8 @@ class CGLibPy_Point(object):
             return True 
         else:
             return False
+
+    def translateBy(self,dx,dy,dz):
+        self.X = self.X + dx
+        self.Y = self.Y + dy
+        self.Z = self.Z + dz

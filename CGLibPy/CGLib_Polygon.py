@@ -33,4 +33,9 @@ class CGLibPy_Polygon(object):
         pt1.addConnectedCurve(line)
         pt2.addConnectedCurve(line)
             
+    def translateBy(self,dx,dy,dz):
+        for pt in self.points:
+            pt.translateBy(dx,dy,dz)
+        for ln in self.entities:
+            ln.translateBy(dx,dy,dz)
     

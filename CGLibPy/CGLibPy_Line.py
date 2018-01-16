@@ -38,6 +38,10 @@ class CGLibPy_Line(object):
         x,y,z = pointAtDistAlongUnitVector(self.startPt, self.getVector().unitVector(), dist)
         point = CGLibPy_Point(x,y,z)
         return point
+
+    def translateBy(self,dx,dy,dz):
+        self.startPt.translateBy(dx,dy,dz)
+        self.endPt.translateBy(dx,dy,dz)
         
     def __init__(self,_args):
         if len(_args) == 2: #Two Points
