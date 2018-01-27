@@ -10,7 +10,9 @@ class CGLibPy_TransF(object):
     rotPt = [0,0,0]
     rotVec = [0,0,1]
 
-    transType = 0 # 0 = Translation, 1 = Rotation
+    scaleVec = [1,1,1]
+
+    transType = 0 # 0 = Translation, 1 = Rotation, 2 = Scaling
 
     def __init__(self):
         #Nothing Added Here Yet
@@ -31,4 +33,11 @@ class CGLibPy_TransF(object):
         self.rotPt = rotPt
         self.rotVec = rotVec
         self.transType = 1
+
+    def setScaling(self,scaleX=1,scaleY=1,scaleZ=1):
+        self.scaleVec.append(scaleX);
+        self.scaleVec.append(scaleY);
+        self.scaleVec.append(scaleZ);
+        self.transType = 2
+        
         

@@ -60,6 +60,11 @@ class CGLibPy_Point(object):
 
         self.translateBy(pt[0],pt[1],pt[2])
 
+    def scale(self,x=1,y=1,z=1):
+        self.X *= x
+        self.Y *= y
+        self.Z *= z
+
     def transformBy(self,transF):
         if transF.transType == 0:
             if transF.transByXYZ:
@@ -68,5 +73,7 @@ class CGLibPy_Point(object):
                 self.translateAlongVec(transF.transDist,transF.transVecs)
         elif transF.transType == 1:
             self.rotate(transF.rotAng,transF.rotPt,transF.rotVec);
+        elif transF.transType == 2:
+            self.scale(transF.scaleVec[0],transF.scaleVec[1],transF.scaleVec[2])
             
     
