@@ -65,6 +65,11 @@ class CGLibPy_Point(object):
         self.Y *= y
         self.Z *= z
 
+    def shear(self,xShear=[1,1],yShear=[1,1],zShear=[1,1]):
+        self.X += xShear[0]*self.Y + xShear[1]*self.Z
+        self.Y += yShear[0]*self.X + yShear[1]*self.Z
+        self.Z += zShear[0]*self.X + zShear[1]*self.Y
+
     def transformBy(self,transF):
         if transF.transType == 0:
             if transF.transByXYZ:
@@ -75,5 +80,7 @@ class CGLibPy_Point(object):
             self.rotate(transF.rotAng,transF.rotPt,transF.rotVec);
         elif transF.transType == 2:
             self.scale(transF.scaleVec[0],transF.scaleVec[1],transF.scaleVec[2])
+        elif transF.transType == 3:
+            self.shear(transF.xShear,transF.yShear,transF.zShear)
             
     

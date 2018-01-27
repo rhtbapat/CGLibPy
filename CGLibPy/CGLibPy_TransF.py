@@ -12,7 +12,11 @@ class CGLibPy_TransF(object):
 
     scaleVec = [1,1,1]
 
-    transType = 0 # 0 = Translation, 1 = Rotation, 2 = Scaling
+    xShear = [1,1]
+    yShear = [1,1]
+    zShear = [1,1]
+
+    transType = 0 # 0 = Translation, 1 = Rotation, 2 = Scaling, 3 = Shearing
 
     def __init__(self):
         #Nothing Added Here Yet
@@ -35,9 +39,16 @@ class CGLibPy_TransF(object):
         self.transType = 1
 
     def setScaling(self,scaleX=1,scaleY=1,scaleZ=1):
-        self.scaleVec.append(scaleX);
-        self.scaleVec.append(scaleY);
-        self.scaleVec.append(scaleZ);
+        self.scaleVec.append(scaleX)
+        self.scaleVec.append(scaleY)
+        self.scaleVec.append(scaleZ)
         self.transType = 2
+
+    def setShear(self,xShear=[1,1],yShear=[1,1],zShear=[1,1]):
+        self.xShear = xShear
+        self.yShear = yShear
+        self.zShear = zShear
+        self.transType = 3
+        
         
         
