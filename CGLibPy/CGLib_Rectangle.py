@@ -23,3 +23,9 @@ class CGLibPy_Rectangle(CGLibPy_Polygon):
             pt.translateBy(dx,dy,dz)
         for ln in self.entities:
             ln.translateBy(dx,dy,dz)
+
+    def transformBy(self,transF):
+        for pt in self.points:
+            pt.transformBy(self,transF)
+        for ln in self.entities:
+            ln.transformBy(self,transF)

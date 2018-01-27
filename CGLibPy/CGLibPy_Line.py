@@ -5,6 +5,18 @@ from .CGLibPy_Utility import *
 class CGLibPy_Line(object):
     startPt = None
     endPt = None
+        
+    def __init__(self,_args):
+        if len(_args) == 2: #Two Points
+            self.startPt = _args[0]
+            self.endPt = _args[1]
+        elif len(_args) == 6: # 6 Coordinates
+            self.startPt = CGLibPy_Point(_args[0],_args[1],_args[2])
+            self.endPt = CGLibPy_Point(_args[3],_args[4],_args[5])
+        
+        if self.startPt != None and self.endPt != None:
+            self.startPt.addConnectedCurve(self)
+            self.endPt.addConnectedCurve(self)
 
     def getMidPt(self):
         midpt = CGLibPy_Point((self.startPt.X + self.endPt.X)/2,
@@ -42,17 +54,9 @@ class CGLibPy_Line(object):
     def translateBy(self,dx,dy,dz):
         self.startPt.translateBy(dx,dy,dz)
         self.endPt.translateBy(dx,dy,dz)
-        
-    def __init__(self,_args):
-        if len(_args) == 2: #Two Points
-            self.startPt = _args[0]
-            self.endPt = _args[1]
-        elif len(_args) == 6: # 6 Coordinates
-            self.startPt = CGLibPy_Point(_args[0],_args[1],_args[2])
-            self.endPt = CGLibPy_Point(_args[3],_args[4],_args[5])
-        
-        if self.startPt != None and self.endPt != None:
-            self.startPt.addConnectedCurve(self)
-            self.endPt.addConnectedCurve(self)
+    
+    def transformBy(self,transF):
+        self.startPt.transformBy(self,transF)
+        self.startPt.transformBy(self,transF)
         
 

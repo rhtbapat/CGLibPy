@@ -8,3 +8,6 @@ class CGLibPy_Plane(object):
     
     def translateBy(self,dx,dy,dz):
         self.planePoint.translateBy(dx,dy,dz)
+
+    def transformBy(self,transF):
+        self.planePoint(self,transF)

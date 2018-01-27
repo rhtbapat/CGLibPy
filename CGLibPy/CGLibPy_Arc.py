@@ -26,4 +26,9 @@ class CGLibPy_Arc(object):
         self.startPt.translateBy(dx,dy,dz)
         self.endPt.translateBy(dx,dy,dz)
         self.centrePt.translateBy(dx,dy,dz)
+
+    def transformBy(self,transF):
+        self.startPt.transformBy(self,transF)
+        self.startPt.transformBy(self,transF)
+        self.centrePt.transformBy(self,transF)
             

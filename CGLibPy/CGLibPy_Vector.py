@@ -1,10 +1,12 @@
 from .CGLibPy_Utility import *
+from .CGLibPy_Point import CGLibPy_Point
 
 class CGLibPy_Vector(object):
     I = 0.0
     J = 0.0
     K = 0.0
     vecLen = 0.0  
+    vecPoint = None
 
     def __init__(self,_args):
         if len(_args) == 3: # Three Coefficients
@@ -16,6 +18,7 @@ class CGLibPy_Vector(object):
             self.J = _args[1].Y - _args[0].Y
             self.K = _args[1].Z - _args[0].Z
         self.vecLen = math.sqrt(self.I*self.I + self.J*self.J + self.K*self.K)
+        self.vecPoint = CGLibPy_Point(self.I,self.J,self.K);
 
     def normalize(self):        
         self.I = self.I/self.vecLen
@@ -44,6 +47,10 @@ class CGLibPy_Vector(object):
             return True
         else:
             return False
+
+    def transformBy(self,transF):
+        self.vecPoint.transformBy(self,transF)
+        self.I,self.J,self.K = self.vecPoint.X,self.vecPoint.Y,self.vecPoint.Z
             
 
         
