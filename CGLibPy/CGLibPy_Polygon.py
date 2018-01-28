@@ -41,7 +41,7 @@ class CGLibPy_Polygon(object):
 
     def transformBy(self,transF):
         for pt in self.points:
-            pt.transformBy(self,transF)
+            pt.transformBy(transF)
         for ln in self.entities:
-            ln.transformBy(self,transF)
+            ln.transformBy(transF)
     

@@ -18,9 +18,6 @@ class CGLibPy_TransF(object):
 
     transType = 0 # 0 = Translation, 1 = Rotation, 2 = Scaling, 3 = Shearing
 
-    def __init__(self):
-        #Nothing Added Here Yet
-
     def setTranslationXYZ(self,dx=0,dy=0,dz=0):
         self.transByXYZ = True
         self.translateXYZ = [dx,dy,dz]
@@ -33,7 +30,7 @@ class CGLibPy_TransF(object):
         self.transType = 0
             
     def setRotation(self,ang=0,rotPt=[0,0,0],rotVec=[0,0,1]):
-        self.rotAng = ang
+        self.rotAng = math.radians(ang);
         self.rotPt = rotPt
         self.rotVec = rotVec
         self.transType = 1

@@ -56,7 +56,7 @@ class CGLibPy_Line(object):
         self.endPt.translateBy(dx,dy,dz)
     
     def transformBy(self,transF):
-        self.startPt.transformBy(self,transF)
-        self.startPt.transformBy(self,transF)
+        self.startPt.transformBy(transF)
+        self.endPt.transformBy(transF)
         
 

@@ -1,4 +1,4 @@
-from .CGLib_Polygon import CGLibPy_Polygon
+from .CGLibPy_Polygon import CGLibPy_Polygon
 
 class CGLibPy_Rectangle(CGLibPy_Polygon):
     length = 0.0
@@ -26,6 +26,6 @@ class CGLibPy_Rectangle(CGLibPy_Polygon):
 
     def transformBy(self,transF):
         for pt in self.points:
-            pt.transformBy(self,transF)
+            pt.transformBy(transF)
         for ln in self.entities:
-            ln.transformBy(self,transF)
+            ln.transformBy(transF)

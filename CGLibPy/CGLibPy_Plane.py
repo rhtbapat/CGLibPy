@@ -10,4 +10,5 @@ class CGLibPy_Plane(object):
         self.planePoint.translateBy(dx,dy,dz)
 
     def transformBy(self,transF):
-        self.planePoint(self,transF)
+        self.planePoint.transformBy(transF)
+        self.normalVector.transformBy(transF)

@@ -49,7 +49,7 @@ class CGLibPy_Vector(object):
             return False
 
     def transformBy(self,transF):
-        self.vecPoint.transformBy(self,transF)
+        self.vecPoint.transformBy(transF)
         self.I,self.J,self.K = self.vecPoint.X,self.vecPoint.Y,self.vecPoint.Z
             
 
