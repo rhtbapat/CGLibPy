@@ -23,12 +23,14 @@ class CGLibPy_Arc(object):
             self.CCW = _args[4]
 
     def translateBy(self,dx,dy,dz):
-        self.startPt.translateBy(dx,dy,dz)
-        self.endPt.translateBy(dx,dy,dz)
+        if self.startPt != None and self.endPt != None:
+            self.startPt.translateBy(dx,dy,dz)
+            self.endPt.translateBy(dx,dy,dz)
         self.centrePt.translateBy(dx,dy,dz)
 
     def transformBy(self,transF):
-        self.startPt.transformBy(transF)
-        self.endPt.transformBy(transF)
+        if self.startPt != None and self.endPt != None:
+            self.startPt.transformBy(transF)
+            self.endPt.transformBy(transF)
         self.centrePt.transformBy(transF)
             

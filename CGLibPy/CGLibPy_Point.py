@@ -44,6 +44,8 @@ class CGLibPy_Point(object):
             vec[1] = vec[1]/vecLen
             vec[2] = vec[2]/vecLen
 
+        ang = math.radians(ang)
+
         cang = math.cos(ang)
         CAng = 1-cang
         SAng = math.sin(ang)
@@ -60,13 +62,13 @@ class CGLibPy_Point(object):
                 cang+vec[2]*vec[2]*CAng]
 
         
-        self.translateBy(-pt[0],-pt[1],-pt[2])
+        self.translateBy([-pt[0],-pt[1],-pt[2]])
 
         self.X = self.X*row1[0] + self.Y*row1[1] + self.Z*row1[2]
         self.Y = self.X*row2[0] + self.Y*row2[1] + self.Z*row2[2]
         self.Z = self.X*row3[0] + self.Y*row3[1] + self.Z*row3[2]
 
-        self.translateBy(pt[0],pt[1],pt[2])
+        self.translateBy([pt[0],pt[1],pt[2]])
 
     def scale(self,x=1,y=1,z=1):
         self.X *= x
@@ -83,7 +85,7 @@ class CGLibPy_Point(object):
             if transF.transByXYZ:
                 self.translateBy(transF.translateXYZ)
             else:
-                self.translateAlongVec(transF.transDist,transF.transVecs)
+                self.translateAlongVec(transF.transDist,transF.transVec)
         elif transF.transType == 1:
             self.rotate(transF.rotAng,transF.rotPt,transF.rotVec);
         elif transF.transType == 2:
