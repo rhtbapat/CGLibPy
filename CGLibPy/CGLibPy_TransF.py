@@ -16,7 +16,7 @@ class CGLibPy_TransF(object):
     yShear = [1,1]
     zShear = [1,1]
 
-    transType = 0 # 0 = Translation, 1 = Rotation, 2 = Scaling, 3 = Shearing
+    transType = -1 # 0 = Translation, 1 = Rotation, 2 = Scaling, 3 = Shearing
     
     # Translation in X, Y and Z Directions
     def setTranslationXYZ(self,dx=0,dy=0,dz=0):
@@ -40,9 +40,9 @@ class CGLibPy_TransF(object):
 
     # Scaling along X, Y and Z directions
     def setScaling(self,scaleX=1,scaleY=1,scaleZ=1):
-        self.scaleVec.append(scaleX)
-        self.scaleVec.append(scaleY)
-        self.scaleVec.append(scaleZ)
+        self.scaleVec[0] = scaleX
+        self.scaleVec[1] = scaleY
+        self.scaleVec[2] = scaleZ
         self.transType = 2
 
     # Shearing Factors along X, Y and Z Directions
