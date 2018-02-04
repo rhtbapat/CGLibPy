@@ -1,5 +1,7 @@
 import math
 
+_PI_ = math.pi;
+
 def distCoords(X1,Y1,Z1,X2,Y2,Z2):
     return math.sqrt(math.pow(X2-X1,2)+math.pow(Y2-Y1,2)+math.pow(Z2-Z1,2))
 
@@ -45,19 +47,19 @@ def ang2VectorsRadian(vec1,vec2):
     matMod = matrixModule2Vectors(vec1,vec2)
     if math.isclose(numer,0):
         if matMod < 0:
-            ang = 3*math.pi/2
+            ang = 3*_PI_/2
         else:            
-            ang = math.pi/2
+            ang = _PI_/2
     elif math.isclose(matMod,0):
         if numer > 0:
             ang = 0.0
         else:            
-            ang = math.pi
+            ang = _PI_
     else:
         ang = math.atan(matMod/numer)
     
-    while ang <= -math.pi:
-        ang = ang + 2*math.pi
+    while ang <= -_PI_:
+        ang = ang + 2*_PI_
     return ang
 
 def ang2VectorsDegree(vec1,vec2):
