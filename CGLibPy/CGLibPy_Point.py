@@ -27,14 +27,22 @@ class CGLibPy_Point(object):
         self.Z += transVec[2]
     
     def translateAlongVec(self,dist=0,vec=[1,0,0]):
-        if(math.isclose(math.sqrt(vec[0]**2+vec[1]**2+vec[2]**2)),1):
+        vecLen = math.sqrt(vec[0]**2+vec[1]**2+vec[2]**2)
+        if(math.isclose(vecLen,1)):
             self.X += dist*vec[0]
             self.Y += dist*vec[1]
             self.Z += dist*vec[2]
+        else:
+            self.X += dist*vec[0]/vecLen
+            self.Y += dist*vec[1]/vecLen
+            self.Z += dist*vec[2]/vecLen
 
     def rotate(self,ang=0,pt=[0,0,0],vec=[0,0,1]):
-        if(math.isclose(math.sqrt(vec[0]**2+vec[1]**2+vec[2]**2)),1 == False):
-            return
+        vecLen = math.sqrt(vec[0]**2+vec[1]**2+vec[2]**2)
+        if(math.isclose(vecLen,1) == False):
+            vec[0] = vec[0]/vecLen
+            vec[1] = vec[1]/vecLen
+            vec[2] = vec[2]/vecLen
 
         cang = math.cos(ang)
         CAng = 1-cang
