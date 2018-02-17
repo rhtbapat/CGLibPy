@@ -6,21 +6,21 @@ import CGLibPy
 
 point = CGLibPy.CGLibPy_Point(10,20,30)
 
-line = CGLibPy.CGLibPy_Line([0,0,0,10,0,0])
-line2 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0])
-line3 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0])
-line4 = CGLibPy.CGLibPy_Line([10,0,0,10,10,0])
-line5 = CGLibPy.CGLibPy_Line([4.56,-12.345,34.126546,-98.5,10,54.005]) 
-line6 = CGLibPy.CGLibPy_Line([0,0,0,0,10,0]) 
-line7 = CGLibPy.CGLibPy_Line([0,0,0,0,0,10])
+line = CGLibPy.CGLibPy_Line(0,0,0,10,0,0)
+line2 = CGLibPy.CGLibPy_Line(0,0,0,0,10,0)
+line3 = CGLibPy.CGLibPy_Line(0,0,0,0,10,0)
+line4 = CGLibPy.CGLibPy_Line(10,0,0,10,10,0)
+line5 = CGLibPy.CGLibPy_Line(4.56,-12.345,34.126546,-98.5,10,54.005) 
+line6 = CGLibPy.CGLibPy_Line(0,0,0,0,10,0) 
+line7 = CGLibPy.CGLibPy_Line(0,0,0,0,0,10)
 
-line8 = CGLibPy.CGLibPy_Line([0,0,0,10,10,10]) 
-line9 = CGLibPy.CGLibPy_Line([5,5,0,12,12,12])   
+line8 = CGLibPy.CGLibPy_Line(0,0,0,10,10,10) 
+line9 = CGLibPy.CGLibPy_Line(5,5,0,12,12,12)   
 
-arc1 = CGLibPy.CGLibPy_Arc( [CGLibPy.CGLibPy_Point(0,0,0),
+arc1 = CGLibPy.CGLibPy_Arc( CGLibPy.CGLibPy_Point(0,0,0),
                             CGLibPy.CGLibPy_Point(-5,0,0),
                             CGLibPy.CGLibPy_Point(5,0,0),
-                            5, True])
+                            5, True)
 
 point1 = CGLibPy.CGLibPy_Point(2,5,7)
 point2 = CGLibPy.CGLibPy_Point(-2,5,7)

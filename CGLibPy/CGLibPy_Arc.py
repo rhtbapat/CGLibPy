@@ -9,18 +9,18 @@ class CGLibPy_Arc(object):
     fullCircle = False
     CCW = True
 
-    def __init__(self,_args):
-        if len(_args) == 3: #Circle - Centre, radius, Orientation
-            self.centrePt = _args[0]
-            self.radius = _args[1]
-            self.CCW = _args[2]
+    def __init__(self,*args):
+        if len(args) == 3: #Circle - Centre, radius, Orientation
+            self.centrePt = args[0]
+            self.radius = args[1]
+            self.CCW = args[2]
             self.fullCircle = True
-        elif len(_args) == 5: #Arc - Centre, Start Pt, End Pt, radius, Orientation
-            self.centrePt = _args[0]
-            self.startPt = _args[1]
-            self.endPt = _args[2]
-            self.radius = _args[3]
-            self.CCW = _args[4]
+        elif len(args) == 5: #Arc - Centre, Start Pt, End Pt, radius, Orientation
+            self.centrePt = args[0]
+            self.startPt = args[1]
+            self.endPt = args[2]
+            self.radius = args[3]
+            self.CCW = args[4]
 
     def translateBy(self,dx,dy,dz):
         if self.startPt != None and self.endPt != None:

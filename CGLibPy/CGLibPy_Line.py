@@ -6,13 +6,13 @@ class CGLibPy_Line(object):
     startPt = None
     endPt = None
         
-    def __init__(self,_args):
-        if len(_args) == 2: #Two Points
-            self.startPt = _args[0]
-            self.endPt = _args[1]
-        elif len(_args) == 6: # 6 Coordinates
-            self.startPt = CGLibPy_Point(_args[0],_args[1],_args[2])
-            self.endPt = CGLibPy_Point(_args[3],_args[4],_args[5])
+    def __init__(self,*args):
+        if len(args) == 2: #Two Points
+            self.startPt = args[0]
+            self.endPt = args[1]
+        elif len(args) == 6: # 6 Coordinates
+            self.startPt = CGLibPy_Point(args[0],args[1],args[2])
+            self.endPt = CGLibPy_Point(args[3],args[4],args[5])
         
         if self.startPt != None and self.endPt != None:
             self.startPt.addConnectedCurve(self)
@@ -25,7 +25,7 @@ class CGLibPy_Line(object):
         return midpt
 
     def getVector(self):
-        vec = CGLibPy_Vector([self.startPt,self.endPt])
+        vec = CGLibPy_Vector(self.startPt,self.endPt)
         return vec
 
     def getLength(self):

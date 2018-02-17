@@ -6,10 +6,10 @@ class CGLibPy_Point(object):
     Z = 0.0
     connectedCurves = []
 
-    def __init__(self, xcoord,ycoord,zcoord):
-        self.X = xcoord
-        self.Y = ycoord
-        self.Z = zcoord
+    def __init__(self,*args):
+        self.X = args[0]
+        self.Y = args[1]
+        self.Z = args[2]
 
     def addConnectedCurve(self, curve):
         if len(self.connectedCurves) == 0 or curve in self.connectedCurves:

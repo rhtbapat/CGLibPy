@@ -8,15 +8,15 @@ class CGLibPy_Vector(object):
     vecLen = 0.0  
     vecPoint = None
 
-    def __init__(self,_args):
-        if len(_args) == 3: # Three Coefficients
-            self.I = _args[0]
-            self.J = _args[1]
-            self.K = _args[2]
-        elif len(_args) == 2: # Six Coordinates
-            self.I = _args[1].X - _args[0].X
-            self.J = _args[1].Y - _args[0].Y
-            self.K = _args[1].Z - _args[0].Z
+    def __init__(self,*args):
+        if len(args) == 3: # Three Coefficients
+            self.I = args[0]
+            self.J = args[1]
+            self.K = args[2]
+        elif len(args) == 2: # Six Coordinates
+            self.I = args[1].X - args[0].X
+            self.J = args[1].Y - args[0].Y
+            self.K = args[1].Z - args[0].Z
         self.vecLen = math.sqrt(self.I*self.I + self.J*self.J + self.K*self.K)
         self.vecPoint = CGLibPy_Point(self.I,self.J,self.K);
 
@@ -29,7 +29,7 @@ class CGLibPy_Vector(object):
         i = self.I/self.vecLen
         j = self.J/self.vecLen
         k = self.K/self.vecLen
-        unitVec = CGLibPy_Vector([i,j,k])
+        unitVec = CGLibPy_Vector(i,j,k)
         return unitVec
 
     def isParallelVector(self,inputVec):
