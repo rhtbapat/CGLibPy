@@ -193,6 +193,16 @@ def lineLineIntersection3D(line1,line2):
             intersect = False
 
     return intersect,u,v
+
+def distanceBtween2Lines3D(line1,line2):
+    intersect,u,v = lineLineIntersection3DPointsParameters(line1.startPt,line1.endPt,line2.startPt,line2.endPt)
+    d = 0.0
+    if(intersect == False):
+        p1 = line1.pointOnLine(u)
+        p2 = line2.pointOnLine(v)
+
+        d = dist2Pts(p1,p2)
+    return d
         
 def pointAtDistAlongUnitVector(startPt,unitVec,dist):
     pX = startPt.X + unitVec.I * dist
@@ -393,12 +403,15 @@ def arcThroughThreePoints(pt1,pt2,pt3):
         return False,None
 
 def lineLineIntersection2DCoordinates(x1,y1,x2,y2,x3,y3,x4,y4):
-    det = (y4-y3)*(x2-x1) - (x4-x3)*(y2-y1)
-    if math.isclose(det,0):
-        return False,0,0 #Bool,u,v
-    u = ((x4-x3)*(y1-y3) - (y4-y3)*(x1-x3))/det
-    v = ((x2-x1)*(y1-y3) - (y2-y1)*(x1-x3))/det
-
+    denom = (y4-y3)*(x2-x1) - (x4-x3)*(y2-y1)
+    if math.isclose(denom,0): #Parallel
+        return False,0,0 
+    numerU = (x4-x3)*(y1-y3) - (y4-y3)*(x1-x3)
+    numerV = (x2-x1)*(y1-y3) - (y2-y1)*(x1-x3)
+    if math.isclose(numerU,0) and math.isclose(numerV,0): # Coincident
+        return False,0,0 
+    u = numerU/denom
+    v = numerV/denom
     return True,u,v
 
 def lineLineIntersection2DXYPoints(point1,point2,point3,point4):
