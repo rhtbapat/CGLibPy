@@ -399,6 +399,7 @@ def arcThroughThreePoints(pt1,pt2,pt3):
         centreArcZ = pt1.Z + (actualPt23Z-pt1.Z)*ratio2
 
         radius = distCoords(centreArcX,centreArcY,centreArcZ,pt1.X,pt1.Y,pt1.Z)
+        return True,[centreArcX,centreArcY,centreArcZ],radius
     else:
         return False,None
 
