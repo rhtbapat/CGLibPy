@@ -90,7 +90,12 @@ def areVectorsParallelIJK(I1,J1,K1,I2,J2,K2):
         return False
 
 def areVectorsParallel(vec1,vec2):
-    return areVectorsParallelIJK(vec1.I,vec1.J,vec1.K,vec2.I,vec2.J,vec2.K)
+    cP = crossProduct3D(vec1,vec2)
+    vecLen = math.sqrt(cP[0]*cP[0] + cP[1]*cP[1] + cP[2]*cP[2])
+    if(math.isclose(vecLen,0.0)):
+        return True
+    else:
+        return False
 
 def areLinesParallelCoordinates(point1,point2,point3,point4):
     I1 = point2[0]-point1[0]
